@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Davidson Baseball - Grade Calculator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://kit.fontawesome.com/7cbad28bdb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fa-solid fa-baseball-bat-ball bat"></i>Davidson Baseball<i class="fa-solid fa-baseball fa-sm ball"></i></h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <div class="form-row">
+
+        <!-- TruMedia Upload -->
+        <div class="form-section">
+          <div class="trackman-button-group"> <!-- REUSED CLASS -->
+            <label class="custom-file-label full-width" for="trumedia">Select TruMedia</label>
+          </div>
+
+          <input type="file" id="trumedia" name="trumedia" accept=".csv" onchange="updateFileDisplay('trumedia')">
+          <div class="file-name-display" id="trumedia-name">
+            <div class="file-label-entry">
+              <span class="file-name">No file selected</span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Trackman Upload with Clear Button -->
+        <div class="form-section">
+          <div class="trackman-button-group">
+            <label class="custom-file-label" for="trackman">Select Trackman</label>
+            <button type="button" class="clear-file-btn" onclick="clearTrackmanFiles()">Clear All</button>
+          </div>
+
+          <input type="file" id="trackman" name="trackman" accept=".csv" multiple onchange="updateFileDisplay('trackman')">
+          <div class="file-name-display" id="trackman-name">
+            <div class="file-label-entry">
+              <span class="file-name">No files selected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" onclick="handleComputeClick()">Compute!</button>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

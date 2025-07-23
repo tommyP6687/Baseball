@@ -1,0 +1,20 @@
+# Ignore virtual environments
+venv/
+.env/
+__pycache__/
+*.pyc
+
+# macOS junk
+.DS_Store
+
+# Editor/IDE junk
+.vscode/
+.idea/
+
+# Compiled notebooks
+.ipynb_checkpoints/
+
+# Logs or local test output
+*.log
+*.csv
+*.xlsx
