@@ -1,4 +1,4 @@
-Main goals: 
+Program main goals: 
 1) Calculate player's (specifically batter's) decision score using information presented in Trackman file/s.
 2) Generate player's letter grades using their decision score
 3) Add grade and decision score information of the players to the TruMedia file.
@@ -45,5 +45,4 @@ Other:
 - Coordinates of the ball on the strike zone can be found under the columns "PlateLocSide" and "PlateLocHeight" in the Trackman file/s.
 - Strike zone dimensions used:
 <img width="279" height="254" alt="strikezone" src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" />
-
-URL to access app: https://baseball-stats-app-rg2p.onrender.com (takes ~40 sec to access after extended period of inactivity as we are using the free website deploy version)
+- URL to access app: https://baseball-stats-app-rg2p.onrender.com (takes ~40 sec to access after extended period of inactivity as we are using the free website deploy version)
