@@ -44,6 +44,6 @@
 **Other:** 
 - Coordinates of the ball on the strike zone can be found under the columns "PlateLocSide" and "PlateLocHeight" in the Trackman file/s.
 - Strike zone dimensions used:
-<img width="279" height="254" alt="strikezone" text-align: center src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" alt="strikezone" style="width:558px; height:508px;" /></p>
 
 - URL to access app: https://baseball-stats-app-rg2p.onrender.com (takes ~40 sec to access after extended period of inactivity as we are using the free website deploy version)
