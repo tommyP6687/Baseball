@@ -1,10 +1,10 @@
-Program main goals: 
+**Main goals:** 
 1) Calculate player's (specifically batter's) decision score using information presented in Trackman file/s.
 2) Generate player's letter grades using their decision score
 3) Add grade and decision score information of the players to the TruMedia file.
 4) Reorganize the order of the players in the TruMedia file from highest to lowest decision score.
 
-Scoring logic: 
+**Scoring logic:** 
 ## PitchCall
 
 | Call?                  | Description                                              | Coordinates needed? If not, why?                    | Score        |
@@ -41,7 +41,7 @@ Scoring logic:
 | Error           | A defensive error allowed the batter to reach base        |                                         |        |
 | Undefined       |                                                           |                                         |        |
 
-Other: 
+**Other:** 
 - Coordinates of the ball on the strike zone can be found under the columns "PlateLocSide" and "PlateLocHeight" in the Trackman file/s.
 - Strike zone dimensions used:
 <img width="279" height="254" alt="strikezone" src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" />
