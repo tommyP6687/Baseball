@@ -15,7 +15,7 @@
 | HitByPitch           | Batter hit by pitch and awarded first base               | N/A                                      | N/A       |
 | InPlay               | Batter put the ball into fair territory                  | No, batter hit the ball                  | N/A       |
 | StrikeCalled         | Inside strike zone & no swing                            | No, ball already inside strike zone      | N/A       |
-| StrikeSwinging       | Inside/Outside strike zone & swing but missed            | Yes                                      | In = ?<br>Out = -1 |
+| StrikeSwinging       | Inside/Outside strike zone & swing but missed            | Yes                                      | Out = -1 |
 
 ---
 
