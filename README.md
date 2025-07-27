@@ -51,6 +51,6 @@
 
 |<img width="479" height="202" alt="missing-trackman" src="https://github.com/user-attachments/assets/ccf25660-3f68-426d-ab08-915e60b48ef0"/>|<img width="479" height="202" alt="semi-missing-trackman" src="https://github.com/user-attachments/assets/1b8a6d2e-2e27-477e-894f-eb6294cff478"/>|
 |:--:|:--:|
-| *Final Excel sheet example (before = mismatch in batter's name problem)* | *Final Excel sheet example (after = changed batter's name to match Trackman file/s)* |
+| *Final Excel sheet example (before = mismatch in batter's name)* | *Final Excel sheet example (after = matched batter names to Trackman/s)* |
 
 - URL to access app: `https://baseball-stats-app-rg2p.onrender.com` (takes ~40 sec to access after an extended period of inactivity, as we are using the free website deploy version)
