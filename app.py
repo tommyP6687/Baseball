@@ -9,12 +9,17 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# ----------------------------------------
-# Utility Functions
-# ----------------------------------------
-
+#Utility Functions
 def load_and_filter_trackman(file_objs):
-    """Load and clean Trackman CSVs."""
+    """
+    Load and filter Trackman CSV files.
+
+    Parameters:
+    file_objs (list): A list of uploaded Trackman file objects
+
+    Returns:
+    pd.DataFrame: Combined and cleaned dataframe of all Trackman data
+    """
     desired_columns = ["Batter", "PlateLocHeight", "PlateLocSide", "PitchCall", "KorBB", "PlayResult"]
     filtered_dfs = []
 
@@ -27,9 +32,16 @@ def load_and_filter_trackman(file_objs):
 
     return pd.concat(filtered_dfs, ignore_index=True)
 
-
 def calculate_batter_scores(df):
-    """Apply scoring rules based on pitch results."""
+    """
+    Compute decision scores for each batter.
+
+    Parameters:
+    df (pd.DataFrame): Cleaned Trackman dataframe
+
+    Returns:
+    dict: Mapping of batter names to their scores
+    """
     scores = {}
 
     for _, row in df.iterrows():
@@ -44,7 +56,8 @@ def calculate_batter_scores(df):
             continue
         if batter not in scores:
             scores[batter] = 0
-
+            
+        #Scoring logic based on pitch call and location
         if pitch_call == "BallCalled":
             scores[batter] += 0.25
         elif pitch_call == "StrikeCalled" and korbb == "Strikeout":
@@ -60,9 +73,16 @@ def calculate_batter_scores(df):
 
     return scores
 
-
 def get_grade(score):
-    """Return letter grade based on score."""
+    """
+    Convert numerical score into a letter grade.
+
+    Parameters:
+    score (float): Decision score
+
+    Returns:
+    str: Letter grade
+    """
     if score < -0.5:
         return "C-"
     elif score < 0.0:
@@ -82,26 +102,24 @@ def get_grade(score):
     else:
         return "A+"
 
-
-# ----------------------------------------
-# Routes
-# ----------------------------------------
-
+#Routes
 @app.route('/')
 def index():
+    """Render the homepage with upload form."""
     return render_template('index.html')
-
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    """Handle file uploads, compute scores, merge data, and return Excel output."""
     try:
         trackman_files = request.files.getlist('trackman')
         trumedia_file = request.files.get('trumedia')
 
-        # 1. Load and score Trackman data
+        #1: Load Trackman and compute scores
         combined_df = load_and_filter_trackman(trackman_files)
         scores = calculate_batter_scores(combined_df)
-
+        
+        #2: Create score dataframe with grades and normalized names
         score_df = pd.DataFrame(scores.items(), columns=["Batter", "decisionScore"])
         score_df["Grade"] = score_df["decisionScore"].apply(get_grade)
         score_df["NormalizedName"] = score_df["Batter"].apply(
@@ -112,7 +130,7 @@ def upload():
             for name, grade, score in zip(score_df["NormalizedName"], score_df["Grade"], score_df["decisionScore"])
         }
 
-        # 2. Load TruMedia and merge with scores/grades
+        #3: Load TruMedia file and map decision scores
         trumedia_df = pd.read_csv(trumedia_file)
         trumedia_df["NormalizedName"] = trumedia_df["playerFullName"].str.strip()
 
@@ -125,7 +143,7 @@ def upload():
         trumedia_df["Grade"] = grades
         trumedia_df["decisionScore"] = decision_scores
 
-        # 3. Insert new columns after playerFirstName and sort
+        #4: Insert new columns after playerFirstName and sort by decisionScore
         insert_index = list(trumedia_df.columns).index("playerFirstName") + 1
         cols = list(trumedia_df.columns)
         for col in ["Grade", "decisionScore", "NormalizedName"]:
@@ -133,18 +151,19 @@ def upload():
         reordered = cols[:insert_index] + ["Grade", "decisionScore"] + cols[insert_index:]
         trumedia_final = trumedia_df[reordered].sort_values(by="decisionScore", ascending=False)
 
-        # 4. Export to Excel with color formatting
+        #5: Export to Excel with color formatting
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             trumedia_final.to_excel(writer, index=False, sheet_name='TruMedia')
             sheet = writer.sheets['TruMedia']
-
+            
+            #Identify column indices
             score_col_idx = trumedia_final.columns.get_loc("decisionScore") + 1
             grade_col_idx = trumedia_final.columns.get_loc("Grade") + 1
             col_letter = openpyxl.utils.get_column_letter(score_col_idx)
             score_range = f"{col_letter}2:{col_letter}{len(trumedia_final)+1}"
 
-            # Conditional color scale for decisionScore
+            #Conditional color scale for decisionScore
             rule = ColorScaleRule(
                 start_type='min', start_color='F8696B',
                 mid_type='percentile', mid_value=50, mid_color='FFEB84',
@@ -152,7 +171,7 @@ def upload():
             )
             sheet.conditional_formatting.add(score_range, rule)
 
-            # Gray-out Score + Grade cells for NaNs
+            #Gray out missing values
             gray_fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
             for row_idx, score in enumerate(trumedia_final["decisionScore"], start=2):
                 if pd.isna(score):
@@ -171,10 +190,8 @@ def upload():
         print("🔥 ERROR:", e)
         return f"An error occurred: {e}", 500
 
-
-# ----------------------------------------
-# Production Entrypoint
-# ----------------------------------------
+#Production Entrypoint
 if __name__ == '__main__':
+    #Run with Waitress server for production
     from waitress import serve
     serve(app, host='0.0.0.0', port=8080)
