@@ -28,8 +28,15 @@ def load_and_filter_trackman(file_objs):
         df.columns = df.columns.str.strip()
         filtered = df[[col for col in desired_columns if col in df.columns]].copy()
         filtered = filtered.dropna(subset=["Batter"])
-        filtered_dfs.append(filtered)
+        
+        #Skip empty or all-NA DataFrames to avoid future pandas warning
+        if not filtered.empty and not filtered.isna().all().all():
+            filtered_dfs.append(filtered)
 
+    # If no valid DataFrames, return an empty DataFrame with correct columns
+    if not filtered_dfs:
+        return pd.DataFrame(columns=desired_columns)
+    
     return pd.concat(filtered_dfs, ignore_index=True)
 
 def calculate_batter_scores(df):
