@@ -41,7 +41,7 @@
 | Error           | A defensive error allowed the batter to reach base     | N/A                              | N/A    |
 | Undefined       | N/A                                                    | N/A                              | N/A    |
 
-**Score ranges and corresponding grades**
+**Score ranges and corresponding grades:**
 | Score Range      | Grade |
 |----------------------|-----------|
 | Less than -0.5       | C−        |
