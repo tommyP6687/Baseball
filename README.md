@@ -41,6 +41,19 @@
 | Error           | A defensive error allowed the batter to reach base     | N/A                              | N/A    |
 | Undefined       | N/A                                                    | N/A                              | N/A    |
 
+**Score ranges and corresponding grades**
+| Score Range      | Grade |
+|----------------------|-----------|
+| Less than -0.5       | C−        |
+| -0.5 to < 0.0        | C         |
+| 0.0 to < 0.5         | C+        |
+| 0.5 to < 1.0         | B−        |
+| 1.0 to < 1.5         | B         |
+| 1.5 to < 2.0         | B+        |
+| 2.0 to < 2.5         | A−        |
+| 2.5 to < 3.0         | A         |
+| 3.0 and above        | A+        |
+
 **Other:** 
 - Coordinates of the ball on the strike zone can be found under the columns "PlateLocSide" and "PlateLocHeight" in the Trackman file/s.
 - Strike zone dimensions used: <p align="center"> <img src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" alt="strikezone" style="width:418.5px; height:381px;" /></p>
