@@ -4,23 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Davidson Baseball - Decision Score Calculator</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Font Awesome for baseball icons -->
   <script src="https://kit.fontawesome.com/7cbad28bdb.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="container">
+    <!-- Add icons -->
     <h1><i class="fa-solid fa-baseball-bat-ball bat"></i>Davidson Baseball<i class="fa-solid fa-baseball fa-sm ball"></i></h1>
 
+    <!-- File upload form -->
     <form action="/upload" method="post" enctype="multipart/form-data">
       <div class="form-row">
 
-        <!-- TruMedia Upload -->
+        <!-- TruMedia file upload -->
         <div class="form-section">
           <div class="trackman-button-group"> <!-- REUSED CLASS -->
             <label class="custom-file-label full-width" for="trumedia">Select TruMedia</label>
           </div>
 
+          <!-- Input for TruMedia file (only 1 allowed) -->
           <input type="file" id="trumedia" name="trumedia" accept=".csv" onchange="updateFileDisplay('trumedia')">
+          <!-- Display selected TruMedia filename -->
           <div class="file-name-display" id="trumedia-name">
             <div class="file-label-entry">
               <span class="file-name">No file selected</span>
@@ -28,14 +34,16 @@
           </div>
         </div>
 
-        <!-- Trackman Upload with Clear Button -->
+        <!-- Trackman file upload (multiple allowed) with "clear all" option-->
         <div class="form-section">
           <div class="trackman-button-group">
             <label class="custom-file-label" for="trackman">Select Trackman</label>
             <button type="button" class="clear-file-btn" onclick="clearTrackmanFiles()">Clear All</button>
           </div>
 
+          <!-- Input for Trackman files (multiple uploads) -->
           <input type="file" id="trackman" name="trackman" accept=".csv" multiple onchange="updateFileDisplay('trackman')">
+           <!-- Display selected Trackman filenames -->
           <div class="file-name-display" id="trackman-name">
             <div class="file-label-entry">
               <span class="file-name">No files selected</span>
@@ -43,10 +51,12 @@
           </div>
         </div>
       </div>
+      <!-- Compute Button to trigger form logic -->
       <button type="button" onclick="handleComputeClick()">Compute!</button>
     </form>
   </div>
 
+  <!-- Link to external JavaScript -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
