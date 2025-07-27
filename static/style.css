@@ -1,3 +1,4 @@
+/* Global styles  */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
@@ -15,6 +16,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Header */
 h1 {
     display: inline-block;
     width: 80%;
@@ -28,6 +30,7 @@ h1 {
     border-radius: 6px;
 }
 
+/* Baseball bat icon */
 .bat {
   display: inline-block;
   margin-right: 5%;
@@ -40,6 +43,7 @@ h1 {
   color: #f0f0f0ba;
 }
 
+/* Baseball bat bounce animation */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   20% { transform: translateY(-30px); }
@@ -48,6 +52,7 @@ h1 {
   80% { transform: translateY(0); }
 }
 
+/* Baseball icon */
 .ball {
     margin-left: 5%;
     padding-right: 0;
@@ -59,12 +64,13 @@ h1 {
     color: #f0f0f0ba;
 }
 
+/* Baseball spin animation */
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-
+/* Form layout */
 form {
     display: flex;
     flex-direction: column;
@@ -85,6 +91,7 @@ form {
     position: relative;
 }
 
+/* Labels */
 label {
     font-weight: bold;
     font-size: 16px;
@@ -95,7 +102,7 @@ input[type="file"] {
     display: none;
 }
 
-/* Styled labels as buttons */
+/* Styled file input labels */
 .custom-file-label {
     display: inline-block;
     padding: 12px 16px;
@@ -119,6 +126,7 @@ input[type="file"] {
     background-color: #ec8e7ee3;
 }
 
+/* File display area */
 .file-name-display {
     font-size: 14px;
     color: #fff;
@@ -152,6 +160,7 @@ input[type="file"] {
     text-align: left;
 }
 
+/* Buttons inside file list entries */
 .file-label-entry .remove-file-btn,
 .file-label-entry .add-file-btn {
     background: none;
@@ -171,6 +180,7 @@ input[type="file"] {
     color: #ffcccc;
 }
 
+/* Add button wrapper */
 .add-file-btn-wrapper {
     display: flex;
     align-items: center;
@@ -181,6 +191,7 @@ input[type="file"] {
     margin-top: 6px;
 }
 
+/* Main button */
 button {
     padding: 12px;
     font-size: 16px;
@@ -203,18 +214,21 @@ button:active {
     background-color: #ec8e7ee3;
 }
 
+/* Combined button group  */
 .trackman-button-group {
     display: flex;
     width: 101%;
     gap: 0;
 }
 
+/* Left part of file button (label) */
 .custom-file-label {
     border-radius: 6px 0 0 6px;
     width: 66.6%;
     text-align: center;
 }
 
+/* Right part of file button (clear) */
 .clear-file-btn {
     background-color: white;
     color: #c62828;
@@ -236,6 +250,7 @@ button:active {
     background-color: #ec8e7ee3;
 }
 
+/* Utility class for full-width label */
 .full-width {
   width: 100%;
   border-radius: 6px;
