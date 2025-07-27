@@ -45,4 +45,10 @@
 - Coordinates of the ball on the strike zone can be found under the columns "PlateLocSide" and "PlateLocHeight" in the Trackman file/s.
 - Strike zone dimensions used: <p align="center"> <img src="https://github.com/user-attachments/assets/b28e51b3-66b5-44a4-ab06-12dc549b2acb" alt="strikezone" style="width:418.5px; height:381px;" /></p>
 
+
+- Causes of missing decision scores and grades for certain players in the final Excel sheet (expressed through the greyed-out cells):
+<img width="477" height="206" alt="missing_trackman" src="https://github.com/user-attachments/assets/f4667fd3-50d6-4027-bbae-4cee23ec709d" />
+--> One possible cause is that the batter's records are entirely missing from the Trackman/s provided.
+--> A more likely cause is the slight differences between how a batter's name is listed in TruMedia vs. in the Trackman file/s. As the program uses the batter's name in TruMedia as the main name to search for a match in the Trackman file/s, if the batter's full name in both types of files is not exactly the same (eg. Jamie Daly =/= Jameson Daly), the program looks past it and the Trackman data is not extracted for further calculation. --> A quick way to fix this is to change the full name of that/those batter/s in the TruMedia file only under the "playerFullName" column (as only use names under that column for name matching) to the exact name of that batter listed in the Trackman file/s. After those changes are made, rerun the program and that/those player/s data should appear. 
+
 - URL to access app: https://baseball-stats-app-rg2p.onrender.com (takes ~40 sec to access after extended period of inactivity as we are using the free website deploy version)
