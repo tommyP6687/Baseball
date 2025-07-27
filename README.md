@@ -66,4 +66,4 @@
 |:--:|:--:|
 | *Final Excel sheet example (before = mismatch in batter's name)* | *Final Excel sheet example (after = adjusted name to match Trackman)* |
 
-- URL to access app: `https://baseball-stats-app-rg2p.onrender.com` (takes ~40 sec to access after an extended period of inactivity, as we are using the free website deploy version)
+- URL to access app: `https://baseball-stats-app-rg2p.onrender.com` (takes ~50 sec to access after an extended period of inactivity, as we are using the free website deploy version)
