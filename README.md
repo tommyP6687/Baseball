@@ -48,12 +48,8 @@
 - Causes of missing decision scores and grades for certain players in the final Excel sheet (expressed through the greyed-out cells):
   - One possible cause is that the batter's records are entirely missing from the Trackman/s provided.
   - A more likely cause is the slight differences between how a batter's name is listed in TruMedia vs. in the Trackman file/s. As the program uses the batter's name in TruMedia as the main name to search for a match in the Trackman file/s, if the batter's full name in both types of files is not exactly the same (eg. Jamie Daly =/= Jameson Daly),the program looks past it and the Trackman data is not extracted for further calculation. --> A quick way to fix this is to change the full name of that/those batter/s in the TruMedia file only under the "playerFullName" column (as we only use names under that column for name matching) to the exact name of that batter listed in the Trackman file/s. After those changes are made, rerun the program and that/those player/s data should appear.
-Example of mismatch in batter name (before):
-
-(after):
-
 |<img width="476" height="200" alt="missing-trackman" src="https://github.com/user-attachments/assets/ccf25660-3f68-426d-ab08-915e60b48ef0" /> | <img width="479" height="202" alt="semi-missing-trackman" src="https://github.com/user-attachments/assets/1b8a6d2e-2e27-477e-894f-eb6294cff478" /> |
 |:--:|:--:|
-| *Caption 1* | *Caption 2* |
+| *Mismatch in batter's name problem (before)* | *Mismatch in batter's name problem (after)* |
 
 - URL to access app: `https://baseball-stats-app-rg2p.onrender.com` (takes ~40 sec to access after an extended period of inactivity, as we are using the free website deploy version)
