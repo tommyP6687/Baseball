@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, send_file
 import pandas as pd
-import io
 import numpy as np
-import openpyxl
+import io
 from openpyxl.styles import PatternFill
 from openpyxl.formatting.rule import ColorScaleRule
-from werkzeug.utils import secure_filename
+from openpyxl.utils import get_column_letter
 
 app = Flask(__name__)
 
@@ -167,7 +166,7 @@ def upload():
             #Identify column indices
             score_col_idx = trumedia_final.columns.get_loc("decisionScore") + 1
             grade_col_idx = trumedia_final.columns.get_loc("Grade") + 1
-            col_letter = openpyxl.utils.get_column_letter(score_col_idx)
+            col_letter = get_column_letter(score_col_idx)
             score_range = f"{col_letter}2:{col_letter}{len(trumedia_final)+1}"
 
             #Conditional color scale for decisionScore
