@@ -1,13 +1,17 @@
+//Track previously selected files
 let previousTrackmanFiles = [];
 let previousTruMediaFile = null;
 
+/**Updates the displayed file list for either Trackman or TruMedia inputs
+ * @param {string} id - The ID of the input element ('trackman' or 'trumedia')
+ */
 function updateFileDisplay(id) {
   const input = document.getElementById(id);
   const display = document.getElementById(`${id}-name`);
   const newFiles = Array.from(input.files);
   const hadPrevious = id === 'trackman' ? previousTrackmanFiles.length > 0 : previousTruMediaFile !== null;
 
-  // Preserve old files if nothing selected
+  //Restore previous files if none selected
   if (!newFiles.length && hadPrevious) {
     if (id === 'trackman') {
       renderFileEntries(previousTrackmanFiles, display, id);
@@ -18,13 +22,14 @@ function updateFileDisplay(id) {
     return;
   }
 
-  // Save and update
+  //Save new files to global state
   if (id === 'trackman') {
     previousTrackmanFiles = newFiles;
   } else if (id === 'trumedia') {
     previousTruMediaFile = newFiles[0] || null;
   }
 
+  //Display placeholder if still empty
   display.innerHTML = '';
   if (!newFiles.length) {
     const empty = document.createElement('div');
@@ -34,10 +39,16 @@ function updateFileDisplay(id) {
     return;
   }
 
+  //Display selected files
   renderFileEntries(newFiles, display, id);
   if (id === 'trackman') addPlusButton(display, id);
 }
 
+/**Displays file entries with a remove button for each
+ * @param {File[]} files - Array of selected files
+ * @param {HTMLElement} display - Container to render file entries into
+ * @param {string} id - The input element ID ('trackman' or 'trumedia')
+ */
 function renderFileEntries(files, display, id) {
   display.innerHTML = '';
   files.forEach((file, index) => {
@@ -60,6 +71,10 @@ function renderFileEntries(files, display, id) {
   });
 }
 
+/**Appends a "+" button to allow adding more Trackman files
+ * @param {HTMLElement} display - Element to append the button into
+ * @param {string} id - The input element ID ('trackman')
+ */
 function addPlusButton(display, id) {
   const addEntry = document.createElement('div');
   addEntry.className = 'file-label-entry';
@@ -70,6 +85,9 @@ function addPlusButton(display, id) {
   display.appendChild(addEntry);
 }
 
+/**Opens a file picker and appends selected files to Trackman input
+ * @param {string} id - The input element ID ('trackman')
+ */
 function triggerAddFile(id) {
   const input = document.getElementById(id);
   const tempInput = document.createElement('input');
@@ -89,14 +107,18 @@ function triggerAddFile(id) {
       input.files = dt.files;
       updateFileDisplay(id);
     } else {
-      updateFileDisplay(id); // preserve display if canceled
+      updateFileDisplay(id); //Retain display if selection is cancelled
     }
     tempInput.remove();
   });
 
-  tempInput.click();
+  tempInput.click(); //Open file picker
 }
 
+/**Removes one file from the input and updates UI accordingly
+ * @param {string} id - The input element ID ('trackman' or 'trumedia')
+ * @param {number} indexToRemove - Index of the file to be removed
+ */
 function removeSingleFile(id, indexToRemove) {
   const input = document.getElementById(id);
   const dt = new DataTransfer();
@@ -123,23 +145,25 @@ function removeSingleFile(id, indexToRemove) {
   }
 }
 
+/**Clears all Trackman files from both UI and memory*/
 function clearTrackmanFiles() {
   const input = document.getElementById("trackman");
-  const dt = new DataTransfer(); // Empty data
+  const dt = new DataTransfer(); //Creates an empty file list
   input.files = dt.files;
-
-  // Clear previous tracking array if needed
   previousTrackmanFiles = [];
-
   updateFileDisplay('trackman');
 }
 
+/**Submits the form after validation passes*/
 function handleComputeClick() {
   if (validateForm()) {
     document.querySelector("form").submit();  // only submits if validation passed
   }
 }
 
+/**Ensures both TruMedia and Trackman files are selected before submitting
+ * @returns {boolean} - True if form is valid, false otherwise
+ */
 function validateForm() {
   const trumediaInput = document.getElementById("trumedia");
   const trackmanInput = document.getElementById("trackman");
@@ -148,20 +172,20 @@ function validateForm() {
   const hasTrackman = trackmanInput && [...trackmanInput.files].some(file => file.name.trim() !== "");
 
   if (!hasTrumedia && !hasTrackman) {
-    alert("⚠️ Please upload both TruMedia and Trackman files.");
+    alert("Please upload both TruMedia and Trackman files.");
     return false;
   }
 
   if (!hasTrumedia) {
-    alert("⚠️ Please upload a TruMedia file.");
+    alert("Please upload a TruMedia file.");
     return false;
   }
 
   if (!hasTrackman) {
-    alert("⚠️ Please upload at least one Trackman file.");
+    alert("Please upload at least one Trackman file.");
     return false;
   }
 
-  alert("✅ Your files are being uploaded and processed...");
+  alert("Your files are being uploaded and processed...");
   return true;
 }
