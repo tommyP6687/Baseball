@@ -193,7 +193,7 @@ def upload():
         )
 
     except Exception as e:
-        print("🔥 ERROR:", e)
+        print("ERROR:", e)
         return f"An error occurred: {e}", 500
 
 #Production Entrypoint
